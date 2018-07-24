@@ -577,7 +577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c319d6468b2ed4a8ef13d12a6beac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioClip: {fileID: 8300000, guid: 31b14d9804a25224eaefc114860a58b3, type: 3}
+  AudioClip: {fileID: 8300000, guid: c003f6843d24c5e469662be9369f9c66, type: 3}
   AudioSource: {fileID: 703642471}
 --- !u!1 &772798011
 GameObject:
@@ -1264,7 +1264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 460ab82aa322d6a4ca5e994d8ae15fa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioClip: {fileID: 8300000, guid: ceca812d610b99a4dac96295e3344f33, type: 3}
+  AudioClip: {fileID: 8300000, guid: c327f669fcd6a0644babfecff5c692af, type: 3}
   AudioSource: {fileID: 1019153628}
 --- !u!1001 &1188892278
 Prefab:
