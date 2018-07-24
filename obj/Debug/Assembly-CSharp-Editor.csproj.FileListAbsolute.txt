@@ -1,0 +1,2 @@
+C:\Users\Stephen\Documents\Unity\New Unity Project\New Unity Project\New Unity Project\Auralia\obj\Debug\Assembly-CSharp-Editor.csprojResolveAssemblyReference.cache
+C:\Users\Stephen\Documents\Unity\New Unity Project\New Unity Project\New Unity Project\Auralia\obj\Debug\Assembly-CSharp-Editor.csproj.CoreCompileInputs.cache
