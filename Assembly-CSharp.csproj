@@ -59,9 +59,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\A_Ball.cs" />
-    <Compile Include="Assets\AudioScript.cs" />
-    <Compile Include="Assets\LeftField.cs" />
+    <Compile Include="Assets\Fields\LeftField.cs" />
+    <Compile Include="Assets\Fields\MiddleField.cs" />
+    <Compile Include="Assets\Fields\RightField.cs" />
     <Compile Include="Assets\MetaSDK\Meta\Binding\Api\ButtonApi.cs" />
     <Compile Include="Assets\MetaSDK\Meta\Binding\Api\CameraApi.cs" />
     <Compile Include="Assets\MetaSDK\Meta\Binding\Api\CompositorApi.cs" />
@@ -393,9 +393,7 @@
     <Compile Include="Assets\MetaSDK\MetaExamples\Assets\Scripts\GazeExampleScript.cs" />
     <Compile Include="Assets\MetaSDK\MetaExamples\Assets\Scripts\MetaPointCloudExample.cs" />
     <Compile Include="Assets\MetaSDK\MetaExamples\Assets\Scripts\SwipeIntensityLightControl.cs" />
-    <Compile Include="Assets\MiddleField.cs" />
-    <Compile Include="Assets\Notes.cs" />
-    <Compile Include="Assets\RightField.cs" />
+    <Compile Include="Assets\RedBall.cs" />
     <None Include="Assets\MetaSDK\Meta\Hands\HandInput\Shaders\MetaTransparent.shader" />
     <None Include="Assets\MetaSDK\Meta\SDK2Version.txt" />
     <None Include="Assets\MetaSDK\MetaExamples\Assets\Shaders\PointCloud.shader" />
