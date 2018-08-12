@@ -4,36 +4,41 @@ using UnityEngine.UI; // Required when Using UI elements.
 
 public class ChangeCube : MonoBehaviour
 {
-    Renderer rend;
-    public Color altColor;
+    // Mesh renderer components
+    private Renderer rend; // Mesh renderer
+    private Material rendMat; // Material from renderer
+    public Slider colorSlider; // Colour Slider component
+    public Color altColor; // <------------------- NEEDED?
 
-    public Slider colorSliderRed;
-
-    float red;
+    // Value of slider
+    public float SliderValue = 0.0f;
 
     private void Awake()
     {
+        // Create renderer material object
         rend = GetComponent<Renderer>();
         rend.enabled = true;
+        rendMat = rend.material;
     }
 
     private void Start()
     {
-        colorSliderRed.onValueChanged.AddListener( delegate
-        {
-            ValueChangeCheckRed();
-        });
+        colorSlider.onValueChanged.AddListener(delegate
+       {
+           ValueChangeCheckRed();
+       });
 
         altColor = rend.material.color;
     }
 
     public void ValueChangeCheckRed()
     {
-        altColor.r = colorSliderRed.value;
+        SliderValue = GUI.HorizontalSlider(new Rect(25, 25, 100, 30), SliderValue, 0.0f, 10.0f);
+        altColor.r = colorSlider.value;
         rend.material.SetColor("_Color", altColor);
     }
 
-
+}
 
     //public Slider redSlider;
     //private Color ballColor;
@@ -65,4 +70,4 @@ public class ChangeCube : MonoBehaviour
     //    ballColor.r = redSlider.value;
     //    myMaterial.color = ballColor;
     //}
-}
+//}

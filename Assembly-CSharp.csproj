@@ -59,7 +59,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ChangeCube.cs" />
     <Compile Include="Assets\Fields\LeftField.cs" />
     <Compile Include="Assets\Fields\MiddleField.cs" />
     <Compile Include="Assets\Fields\RightField.cs" />
@@ -394,7 +393,10 @@
     <Compile Include="Assets\MetaSDK\MetaExamples\Assets\Scripts\GazeExampleScript.cs" />
     <Compile Include="Assets\MetaSDK\MetaExamples\Assets\Scripts\MetaPointCloudExample.cs" />
     <Compile Include="Assets\MetaSDK\MetaExamples\Assets\Scripts\SwipeIntensityLightControl.cs" />
-    <Compile Include="Assets\RedBall.cs" />
+    <Compile Include="Assets\Scripts\ChangeCube.cs" />
+    <Compile Include="Assets\Scripts\Key.cs" />
+    <Compile Include="Assets\Scripts\PanelModel.cs" />
+    <Compile Include="Assets\Scripts\RedBall.cs" />
     <None Include="Assets\MetaSDK\Meta\Hands\HandInput\Shaders\MetaTransparent.shader" />
     <None Include="Assets\MetaSDK\Meta\SDK2Version.txt" />
     <None Include="Assets\MetaSDK\MetaExamples\Assets\Shaders\PointCloud.shader" />
