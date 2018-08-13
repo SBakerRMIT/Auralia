@@ -9,17 +9,25 @@ public class PanelModel : MonoBehaviour
 
     // =========== Declarations ===========
 
-    private bool pastStart = false; 
+    /// Random
+    private bool synthMuted = false;
+    private bool percMuted = false;
+    private bool bassMuted = false;
+    private bool[] isMuted;
+    private bool pastStart = false;
     public GameObject cube;
     private const float yDiff = 0.0f; /// Current y-postion off zero
-    public Slider colourSlider;
 
     /// Audio components
-    public AudioClip MusicClip;
-    public AudioSource MusicSource;
+    public AudioClip MusicClip_synth;
+    public AudioClip MusicClip_bass;
+    public AudioClip MusicClip_perc;
+    public AudioSource[] MusicSources;
     private Boolean isPaused;
 
-    /// Mesh renderer components
+    /// Component objects
+    public Toggle toggleBass; /// Checkbox for bass
+    public Toggle togglePerc; /// Checkbox for percussion
     private Renderer rend; /// Mesh renderer
     private Material rendMat; /// Material from renderer
     public Color cubeColour; /// Color object for cube
@@ -32,14 +40,27 @@ public class PanelModel : MonoBehaviour
     void Start()
     {
         Debug.Log("** LOG: STARTED **");
+        pastStart = true;
+
+        /// Toggle stuff
+        Toggle toggle = GetComponent<Toggle>();
+
         /// Create renderer material object
         rend = cube.GetComponent<Renderer>();
         rend.enabled = true;
         rendMat = rend.material;
         cubeColour = rendMat.color;
-        pastStart = true;
-        MusicSource.clip = MusicClip;
+
+        /// Assign audio values
         isPaused = false;
+        MusicSources[0].clip = MusicClip_synth;
+        MusicSources[1].clip = MusicClip_bass;
+        MusicSources[2].clip = MusicClip_perc;
+
+        for(int i = 0; i < MusicSources.Length; i++ )
+        {
+            MusicSources[i].volume = 50;
+        }
     }
     	
 	/// Update is called once per frame
@@ -64,25 +85,52 @@ public class PanelModel : MonoBehaviour
 
     public void PlayPause()
     {
-        if (MusicSource.isPlaying)
+        for (int i = 0; i < MusicSources.Length; i++)
         {
-            MusicSource.Pause();
-            isPaused = true;
-            Debug.Log("<Paused>");
-        }
-        else
-        {
-            if(isPaused)
+            if (MusicSources[i].isPlaying)
             {
-                MusicSource.UnPause();
-                Debug.Log("<Unpaused>");
-                isPaused = false;
+                MusicSources[i].Pause();
+                isPaused = true;
+                Debug.Log("<Paused>");
             }
             else
             {
-                MusicSource.Play();
-                Debug.Log("<Played>");
+                if (isPaused)
+                {
+                    MusicSources[i].UnPause();
+                    Debug.Log("<Unpaused>");
+                    isPaused = false;
+                }
+                else
+                {
+                    MusicSources[i].Play();
+                    Debug.Log("<Played>");
+                }
             }
         }
     }
+
+    public void ChangeVolume(float sliderValue)
+    {
+        if (!pastStart) return;
+        for (int i = 0; i < MusicSources.Length; i++)
+        {
+            {
+                MusicSources[i].volume = sliderValue / 100;
+            }
+        }
+    }
+
+    public void ToggleSound(int musicSource)
+    {
+        if (MusicSources[musicSource].mute == false)
+        {
+            MusicSources[musicSource].mute = true;
+        }
+        else
+        {
+            MusicSources[musicSource].mute = false;
+        }
+    }
+
 }
