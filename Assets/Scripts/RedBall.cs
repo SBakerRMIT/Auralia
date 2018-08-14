@@ -21,7 +21,8 @@ public class RedBall: MonoBehaviour {
     {
         /// Assign audio clip and volume
         AudioSource.clip = AudioClip;
-        AudioSource.volume = 0.02f;
+        AudioSource.volume = 0.35f;
+
         /// Reference to this object's material
         Renderer renderer = GetComponent<Renderer>();
         _renderMaterial = renderer.material;
@@ -60,16 +61,5 @@ public class RedBall: MonoBehaviour {
     {
         AudioSource.Play();
     }
-
-    //public void GrabEngage ()
-    //{
-    //    _currentColor = _renderMaterial.GetColor("_Color");
-    //    _renderMaterial.SetColor("_Color", Color.black);
-    //}
-
-    //public void GrabDisengage()
-    //{
-    //    _renderMaterial.SetColor("_Color", Color.black);
-    //}
 }
 

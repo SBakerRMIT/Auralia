@@ -10,37 +10,53 @@ public class PanelModel : MonoBehaviour
     // =========== Declarations ===========
 
     /// Random
-    private bool synthMuted = false;
-    private bool percMuted = false;
-    private bool bassMuted = false;
-    private bool[] isMuted;
     private bool pastStart = false;
     public GameObject cube;
-    private const float yDiff = 0.0f; /// Current y-postion off zero
+    public GameObject xylophone;
+
 
     /// Audio components
     public AudioClip MusicClip_synth;
-    public AudioClip MusicClip_bass;
-    public AudioClip MusicClip_perc;
+    public AudioClip MusicClip_wobble;
+    public AudioClip MusicClip_darkfuzz;
     public AudioSource[] MusicSources;
     private Boolean isPaused;
 
+
     /// Component objects
+    private Vector3 pos;
     public Toggle toggleBass; /// Checkbox for bass
     public Toggle togglePerc; /// Checkbox for percussion
     private Renderer rend; /// Mesh renderer
     private Material rendMat; /// Material from renderer
     public Color cubeColour; /// Color object for cube
+    private float currentY; /// Y-coordinates of cube
+    public float diffY; /// Y-coordinate variance with slider
+    private float currentSlider = .25f;
+
+
 
     // =========== Awake / Start / Update ===========
 
     private void Awake() { }
 
+
     /// Use this for initialization
     void Start()
     {
+        /// Random Stuff
         Debug.Log("** LOG: STARTED **");
         pastStart = true;
+
+        /// Transform component
+        pos = cube.transform.position;
+        currentY = pos.y;
+        Debug.Log("Initial currentY: " + currentY);
+        Debug.Log("Initial cube.transform.position.x: " + cube.transform.position.x);
+        Debug.Log("Initial cube.transform.position.y: " + cube.transform.position.y);
+        Debug.Log("Initial cube.transform.position.z: " + cube.transform.position.z);
+
+
 
         /// Toggle stuff
         Toggle toggle = GetComponent<Toggle>();
@@ -54,26 +70,49 @@ public class PanelModel : MonoBehaviour
         /// Assign audio values
         isPaused = false;
         MusicSources[0].clip = MusicClip_synth;
-        MusicSources[1].clip = MusicClip_bass;
-        MusicSources[2].clip = MusicClip_perc;
+        MusicSources[1].clip = MusicClip_wobble;
+        MusicSources[2].clip = MusicClip_darkfuzz;
 
-        for(int i = 0; i < MusicSources.Length; i++ )
+        for (int i = 0; i < MusicSources.Length; i++ )
         {
-            MusicSources[i].volume = 50;
+            MusicSources[i].volume = 1;
         }
     }
     	
+
 	/// Update is called once per frame
 	void Update () { }
 
+
+
     // =========== Regular Methods ===========
+
 
     public void Slider_ChangeHeight(float sliderValue)
     {
-        Vector3 pos = cube.transform.position; /// assign position of the cube to temp variable
-        pos.y = sliderValue + yDiff; /// Set 'y' value to be slider value
+        diffY = currentY - sliderValue;
+        pos = cube.transform.position; /// assign position of the cube to temp variable
+        pos.y = sliderValue + diffY; /// Set 'y' value to be slider value
         cube.transform.position = pos; /// Reassign back to transformations position
+
+        //Debug.Log("METH: currentY: " + currentY + " | sliderValue: " + sliderValue);
+        //diffY = currentY - sliderValue;
+        //float x = cube.transform.position.x;
+        //float y = currentY - diffY;
+        //float z = cube.transform.position.z;
+        //Debug.Log("x: " + x + " | y: " + y + " | z: " + z);
+        //currentY = sliderValue;
+        //cube.transform.position = new Vector3(x, y, z);
     }
+
+
+    public void Slider_PullXylophone(float sliderValue)
+    {
+        Vector3 xyloPos = xylophone.transform.position; /// assign position of the cube to temp variable
+        xyloPos.z = sliderValue + 0; /// Set 'y' value to be slider value
+        xylophone.transform.position = xyloPos; /// Reassign back to transformations position
+    }
+
 
     public void Slider_ChangeColour(float sliderValue)
     {
@@ -82,6 +121,7 @@ public class PanelModel : MonoBehaviour
         cubeColour.b = (255 - sliderValue) / 255;
         rendMat.color = cubeColour;
     }
+
 
     public void PlayPause()
     {
@@ -110,6 +150,7 @@ public class PanelModel : MonoBehaviour
         }
     }
 
+
     public void ChangeVolume(float sliderValue)
     {
         if (!pastStart) return;
@@ -121,6 +162,7 @@ public class PanelModel : MonoBehaviour
         }
     }
 
+
     public void ToggleSound(int musicSource)
     {
         if (MusicSources[musicSource].mute == false)
@@ -131,6 +173,14 @@ public class PanelModel : MonoBehaviour
         {
             MusicSources[musicSource].mute = false;
         }
+    }
+
+
+    public void WhenReleased()
+    {
+        if (!pastStart) return;
+        pos = cube.transform.position;
+        currentY = pos.y;
     }
 
 }

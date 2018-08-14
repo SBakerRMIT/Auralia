@@ -9,6 +9,7 @@ public class ChangeCube : MonoBehaviour
     private Material rendMat; // Material from renderer
     public Slider colorSlider; // Colour Slider component
     public Color altColor; // <------------------- NEEDED?
+    private float currentY;
 
     // Value of slider
     public float SliderValue = 0.0f;
@@ -23,51 +24,61 @@ public class ChangeCube : MonoBehaviour
 
     private void Start()
     {
-        colorSlider.onValueChanged.AddListener(delegate
-       {
-           ValueChangeCheckRed();
-       });
-
-        altColor = rend.material.color;
+        currentY = transform.position.y;
     }
 
-    public void ValueChangeCheckRed()
+    public void whenReleased()
     {
-        SliderValue = GUI.HorizontalSlider(new Rect(25, 25, 100, 30), SliderValue, 0.0f, 10.0f);
-        altColor.r = colorSlider.value;
-        rend.material.SetColor("_Color", altColor);
+        currentY = transform.position.y;
     }
+
+    //private void Start()
+    //{
+    //    colorSlider.onValueChanged.AddListener(delegate
+    //   {
+    //       ValueChangeCheckRed();
+    //   });
+
+    //    altColor = rend.material.color;
+    //}
+
+    //public void ValueChangeCheckRed()
+    //{
+    //    SliderValue = GUI.HorizontalSlider(new Rect(25, 25, 100, 30), SliderValue, 0.0f, 10.0f);
+    //    altColor.r = colorSlider.value;
+    //    rend.material.SetColor("_Color", altColor);
+    //}
 
 }
 
-    //public Slider redSlider;
-    //private Color ballColor;
-    //private Renderer myRenderer;
-    //private Material myMaterial;
-    //private bool pastStart = false;
-    //private int launchCount;
+//public Slider redSlider;
+//private Color ballColor;
+//private Renderer myRenderer;
+//private Material myMaterial;
+//private bool pastStart = false;
+//private int launchCount;
 
 
-    //public void Start()
-    //{
-    //    myRenderer = GetComponent<Renderer>();
-    //    myMaterial = myRenderer.material;
-    //    ballColor = myMaterial.color;
-    //    ballColor.r = 0;
-    //    ballColor.g = 0;
-    //    ballColor.b = 0;
-    //    redSlider.value = ballColor.r;
-    //    pastStart = true;
-    //}
+//public void Start()
+//{
+//    myRenderer = GetComponent<Renderer>();
+//    myMaterial = myRenderer.material;
+//    ballColor = myMaterial.color;
+//    ballColor.r = 0;
+//    ballColor.g = 0;
+//    ballColor.b = 0;
+//    redSlider.value = ballColor.r;
+//    pastStart = true;
+//}
 
-    //public void Update() { }
+//public void Update() { }
 
-    //// Handle slider changes
-    //public void UpdateSliders()
-    //{
-    //    if (!pastStart) { return; }
+//// Handle slider changes
+//public void UpdateSliders()
+//{
+//    if (!pastStart) { return; }
 
-    //    ballColor.r = redSlider.value;
-    //    myMaterial.color = ballColor;
-    //}
+//    ballColor.r = redSlider.value;
+//    myMaterial.color = ballColor;
+//}
 //}
