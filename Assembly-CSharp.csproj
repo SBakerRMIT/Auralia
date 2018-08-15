@@ -393,7 +393,6 @@
     <Compile Include="Assets\MetaSDK\MetaExamples\Assets\Scripts\GazeExampleScript.cs" />
     <Compile Include="Assets\MetaSDK\MetaExamples\Assets\Scripts\MetaPointCloudExample.cs" />
     <Compile Include="Assets\MetaSDK\MetaExamples\Assets\Scripts\SwipeIntensityLightControl.cs" />
-    <Compile Include="Assets\Scripts\ChangeCube.cs" />
     <Compile Include="Assets\Scripts\Key.cs" />
     <Compile Include="Assets\Scripts\PanelModel.cs" />
     <Compile Include="Assets\Scripts\RedBall.cs" />

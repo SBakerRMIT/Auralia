@@ -19,7 +19,9 @@ public class PanelModel : MonoBehaviour
     public AudioClip MusicClip_synth;
     public AudioClip MusicClip_wobble;
     public AudioClip MusicClip_darkfuzz;
+    public AudioClip MusicClip_xyloBacking;
     public AudioSource[] MusicSources;
+    public AudioSource XyloSource;
     private Boolean isPaused;
 
 
@@ -32,7 +34,6 @@ public class PanelModel : MonoBehaviour
     public Color cubeColour; /// Color object for cube
     private float currentY; /// Y-coordinates of cube
     public float diffY; /// Y-coordinate variance with slider
-    private float currentSlider = .25f;
 
 
 
@@ -57,10 +58,6 @@ public class PanelModel : MonoBehaviour
         Debug.Log("Initial cube.transform.position.z: " + cube.transform.position.z);
 
 
-
-        /// Toggle stuff
-        Toggle toggle = GetComponent<Toggle>();
-
         /// Create renderer material object
         rend = cube.GetComponent<Renderer>();
         rend.enabled = true;
@@ -72,6 +69,7 @@ public class PanelModel : MonoBehaviour
         MusicSources[0].clip = MusicClip_synth;
         MusicSources[1].clip = MusicClip_wobble;
         MusicSources[2].clip = MusicClip_darkfuzz;
+        XyloSource.clip = MusicClip_xyloBacking;
 
         for (int i = 0; i < MusicSources.Length; i++ )
         {
@@ -90,9 +88,8 @@ public class PanelModel : MonoBehaviour
 
     public void Slider_ChangeHeight(float sliderValue)
     {
-        diffY = currentY - sliderValue;
-        pos = cube.transform.position; /// assign position of the cube to temp variable
-        pos.y = sliderValue + diffY; /// Set 'y' value to be slider value
+        Vector3 pos = cube.transform.position; /// assign position of the cube to temp variable
+        pos.y = sliderValue + 0.0f; /// Set 'y' value to be slider value
         cube.transform.position = pos; /// Reassign back to transformations position
 
         //Debug.Log("METH: currentY: " + currentY + " | sliderValue: " + sliderValue);
@@ -144,6 +141,32 @@ public class PanelModel : MonoBehaviour
                 else
                 {
                     MusicSources[i].Play();
+                    Debug.Log("<Played>");
+                }
+            }
+        }
+    }
+
+    public void PlayPauseXylo()
+    {
+        {
+            if (XyloSource.isPlaying)
+            {
+                XyloSource.Pause();
+                isPaused = true;
+                Debug.Log("<Paused>");
+            }
+            else
+            {
+                if (isPaused)
+                {
+                    XyloSource.UnPause();
+                    Debug.Log("<Unpaused>");
+                    isPaused = false;
+                }
+                else
+                {
+                    XyloSource.Play();
                     Debug.Log("<Played>");
                 }
             }
